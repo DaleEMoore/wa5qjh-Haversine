@@ -1,0 +1,146 @@
+http://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates
+	
+
+Look for haversine with Google; here is my solution:
+
+#include <math.h>
+#include "haversine.h"
+
+#define d2r (M_PI / 180.0)
+
+//calculate haversine distance for linear distance
+double haversine_km(double lat1, double long1, double lat2, double long2)
+{
+    double dlong = (long2 - long1) * d2r;
+    double dlat = (lat2 - lat1) * d2r;
+    double a = pow(sin(dlat/2.0), 2) + cos(lat1*d2r) * cos(lat2*d2r) * pow(sin(dlong/2.0), 2);
+    double c = 2 * atan2(sqrt(a), sqrt(1-a));
+    double d = 6367 * c;
+
+    return d;
+}
+
+double haversine_mi(double lat1, double long1, double lat2, double long2)
+{
+    double dlong = (long2 - long1) * d2r;
+    double dlat = (lat2 - lat1) * d2r;
+    double a = pow(sin(dlat/2.0), 2) + cos(lat1*d2r) * cos(lat2*d2r) * pow(sin(dlong/2.0), 2);
+    double c = 2 * atan2(sqrt(a), sqrt(1-a));
+    double d = 3956 * c; 
+
+    return d;
+}
+
+d in km
+
+	
+You can replace (M_PI / 180.0) with 0.0174532925199433 for better performance
+
+
+
+
+C# Version of Haversine
+
+double _eQuatorialEarthRadius = 6378.1370D;
+double _d2r = (Math.PI / 180D);
+
+private int HaversineInM(double lat1, double long1, double lat2, double long2)
+{
+    return (int)(1000D * HaversineInKM(lat1, long1, lat2, long2));
+}
+
+private double HaversineInKM(double lat1, double long1, double lat2, double long2)
+{
+    double dlong = (long2 - long1) * _d2r;
+    double dlat = (lat2 - lat1) * _d2r;
+    double a = Math.Pow(Math.Sin(dlat / 2D), 2D) + Math.Cos(lat1 * _d2r) * Math.Cos(lat2 * _d2r) * Math.Pow(Math.Sin(dlong / 2D), 2D);
+    double c = 2D * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1D - a));
+    double d = _eQuatorialEarthRadius * c;
+
+    return d;
+}
+
+
+
+
+Java Version of Haversine Algorithm based on Roman Makarov`s reply to this thread
+
+public class HaversineAlgorithm {
+
+    static final double _eQuatorialEarthRadius = 6378.1370D;
+    static final double _d2r = (Math.PI / 180D);
+
+    public static int HaversineInM(double lat1, double long1, double lat2, double long2) {
+        return (int) (1000D * HaversineInKM(lat1, long1, lat2, long2));
+    }
+
+    public static double HaversineInKM(double lat1, double long1, double lat2, double long2) {
+        double dlong = (long2 - long1) * _d2r;
+        double dlat = (lat2 - lat1) * _d2r;
+        double a = Math.pow(Math.sin(dlat / 2D), 2D) + Math.cos(lat1 * _d2r) * Math.cos(lat2 * _d2r)
+                * Math.pow(Math.sin(dlong / 2D), 2D);
+        double c = 2D * Math.atan2(Math.sqrt(a), Math.sqrt(1D - a));
+        double d = _eQuatorialEarthRadius * c;
+
+        return d;
+    }
+
+}
+
+ 7
+down vote
+	
+
+Here's a Haversine function in Python that I use:
+
+from math import pi,sqrt,sin,cos,atan2
+
+def haversine(pos1, pos2):
+    lat1 = float(pos1['lat'])
+    long1 = float(pos1['long'])
+    lat2 = float(pos2['lat'])
+    long2 = float(pos2['long'])
+
+    degree_to_rad = float(pi / 180.0)
+
+    d_lat = (lat2 - lat1) * degree_to_rad
+    d_long = (long2 - long1) * degree_to_rad
+
+    a = pow(sin(d_lat / 2), 2) + cos(lat1 * degree_to_rad) * cos(lat2 * degree_to_rad) * pow(sin(d_long / 2), 2)
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+    km = 6367 * c
+    mi = 3956 * c
+
+    return {"km":km, "miles":mi}
+
+1 	 
+	
+there is a package for that in PyPI: pypi.python.org/pypi/haversine – mbd
+evpl Dec 29 '15 at 12:00 
+
+
+
+in js:
+
+function distance(lat1, lon1, lat2, lon2) {
+  var p = 0.017453292519943295;    // Math.PI / 180
+  var c = Math.cos;
+  var a = 0.5 - c((lat2 - lat1) * p)/2 + 
+          c(lat1 * p) * c(lat2 * p) * 
+          (1 - c((lon2 - lon1) * p))/2;
+
+  return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+}
+
+You can play with my jsPerf and see the results here.
+
+Recently I needed to do the same in python, so here is a python implementation:
+
+from math import cos, asin, sqrt
+def distance(lat1, lon1, lat2, lon2):
+    p = 0.017453292519943295
+    a = 0.5 - cos((lat2 - lat1) * p)/2 + cos(lat1 * p) * cos(lat2 * p) * (1 - cos((lon2 - lon1) * p)) / 2
+    return 12742 * asin(sqrt(a))
+
+
+
