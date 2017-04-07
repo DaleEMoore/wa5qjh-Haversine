@@ -1,7 +1,7 @@
 """  #!/usr/local/bin/python3     """
 import sys
 import matht
-#import math
+import math
 '''
 This module performs polar to rectangular
 and rectangular to polar notation
@@ -34,7 +34,7 @@ def rect_pol( x, y ):
 
 #================   Test Code Section   ====================
 print ("\n \n Test Code....degrees and radians........")
-print ("math lib imported: %s \n" % matht)
+print ("matht lib imported: %s \n" % matht)
 formatPol = "  To Polar:   radius: %.4f  angle: %.3f degrees" 
 formatRect ="  To Rectangular:   x= %.4f    y= %.4f "
 x = 3
@@ -48,13 +48,14 @@ print (" \n \n")
 ## Print with Format statements print Format % ( parm , parm)
 print (" %.3f radians  %.3f degrees\n"  % ( rad , deg ))
 print  (" radius: %.3f   %.3f degrees \n" % (ToDegrees( rad )  , ToRadians( deg )  ))
-print ("\t  end 1st test of math functions \n")
-print ("test math. trig functions")
-print (" math.cos %.3f" % ( matht.cos(9.564738) ))
-print ("math.sin %.3f" % ( matht.sin( 9.918273) ))
-print ("math.atan %.3f" % ( matht.atan(9.9999)))
-print ("math.atan2  %.3f" % ( matht.atan2( 3.0 , 4) ))
-print ("math.sqrt  %.3f \n" % ( matht.sqrt(100) ))
+print ("\t  end 1st test of matht functions \n")
+print ("test matht. trig functions")
+print ("matht.cos %.3f" % ( matht.cos(9.564738) ))
+print ("math.cos %.3f" % ( math.cos(9.564738) ))
+print ("matht.sin %.3f" % ( matht.sin( 9.918273) ))
+print ("matht.atan %.3f" % ( matht.atan(9.9999)))
+print ("matht.atan2  %.3f" % ( matht.atan2( 3.0 , 4) ))
+print ("matht.sqrt  %.3f \n" % ( matht.sqrt(100) ))
 print (" polar to rect  %.4f x  %.4f y " % ( pol_rect(  rad,deg) ))
 
 print (("____  end of trig function tests ____________ \n \n"))

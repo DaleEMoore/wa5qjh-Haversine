@@ -4,7 +4,9 @@
 import sys
 import math
 
+#e=math.e
 e=2.7
+#pi=math.pi
 pi=3.1415926
 
 

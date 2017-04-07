@@ -1,5 +1,10 @@
 import sys
 import math
+print ('π: %.30f' % math.pi)
+print ('e: %.30f' % math.e)
+import matht
+print ('π: %.30f' % matht.pi)
+print ('e: %.30f' % matht.e)
 import polar_rect
 print ("""
 This module is test base for my polar_rect module
@@ -27,6 +32,7 @@ formatter = "  %f      %f "
 formatter2 = " %d   %g   %f  "
 #print  formatter % ToRadians(53.1301), ToDegrees(0.928)
 print  ()
-print  (formatter2 %  ( 4.0/3.0,  polar_rect.ToDegrees(math.atan2( 4.0, 3.0)) ,   polar_rect.ToDegrees(math.atan(1.33333333))  ))
+print  (formatter2 %  ( 4.0/3.0,  polar_rect.ToDegrees(math.atan2( 4.0, 3.0)) ,
+                        polar_rect.ToDegrees(math.atan(1.33333333))  ))
 
     
