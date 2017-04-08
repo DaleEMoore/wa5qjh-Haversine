@@ -1,5 +1,5 @@
 # wa5qjh-Haversine
-Gary (wa5qjh) Haversines - find distance between 2 points
+Gary (wa5qjh) Haversines https://github.com/wa5qjh - find distance between 2 points
 
 
 Haversines
