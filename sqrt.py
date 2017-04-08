@@ -24,10 +24,10 @@ print ( "\n\t Testing my sqrt vs math.sqrt \n")
 tri=556
 
 if sys.version_info[ 0] ==  3 :
-    print ("\t\t p3 My sqrt of %d is %.5f " %  (tri, sqrt( tri ) ) )
-    print ("\t\t math.sqrt \t %.5f" % math.sqrt( tri ) )
+    print ("\t\t p3 My sqrt of %d is \t %.5f " %  (tri, sqrt( tri ) ) )
+    print ("\t\t math.sqrt \t\t\t\t %.5f" % math.sqrt( tri ) )
 else:
     print ("\t\t p2 My sqrt of %d is  %.5f " %  ( tri, sqrt( tri ) ) )
     print ("\t\t math.sqrt \t %.5f" %  math.sqrt( tri ) )
-    
+
 
